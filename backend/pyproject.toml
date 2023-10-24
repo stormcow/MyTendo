@@ -2,19 +2,19 @@
 name = "backend"
 version = "0.1.0"
 description = ""
-authors = ["stormcow <janek237krokodyl@gmail.com>"]
+authors = ["stormcow <monkiimode@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
 mypy = "^1.5.1"
-black = "^23.9.1"
 fastapi = "^0.103.1"
 uvicorn = "^0.23.2"
-flake8 = "^6.1.0"
 pydantic = "^2.4.2"
 httpio = "^0.3.0"
 sqlalchemy = "^2.0.21"
+ruff = "^0.1.2"
+httpx = "^0.25.0"
 
 
 [build-system]
@@ -24,5 +24,52 @@ build-backend = "poetry.core.masonry.api"
 [tool.mypy]
 strict = true
 
-[tool.flake8]
-max-line-length = 88
+[tool.ruff]
+extend-exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+]
+line-length = 88
+extend-select = [
+    "E",
+    "F",
+    "A",
+    "B",
+    "ISC",
+    "SIM",
+    "TCH",
+    "UP",
+    "RUF",
+    "I",
+    "N",
+    "ANN",
+    "SLF",
+    "ARG",
+    "PTH",
+    "PL",
+]
+ignore = []
+fixable = ["ALL"]
+fix = true
+show-fixes = true
+unfixable = []
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"

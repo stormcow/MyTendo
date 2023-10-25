@@ -2,7 +2,6 @@
 name = "backend"
 version = "0.1.0"
 description = ""
-authors = ["stormcow <monkiimode@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
@@ -50,26 +49,29 @@ extend-exclude = [
 ]
 line-length = 88
 extend-select = [
-    "E",
-    "F",
-    "A",
-    "B",
-    "ISC",
-    "SIM",
-    "TCH",
-    "UP",
-    "RUF",
-    "I",
-    "N",
-    "ANN",
-    "SLF",
-    "ARG",
-    "PTH",
-    "PL",
+   "E",
+   "B",
+   "F",
+   "W",
+   "SIM",
+   "TCH",
+   "C4",
+   "BLE",
+   "ERA",
+   "I",
+   "INP",
+   "ISC",
+   "N",
+   "NPY",
+   "PGH",
+   "S",
+   "RUF",
+   "S",
+   "T20",
+   "TID",
+   "YTT"
 ]
-ignore = []
+extend-ignore = ["E203", "E501", "S101"]
 fixable = ["ALL"]
 fix = true
 show-fixes = true
-unfixable = []
-dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"

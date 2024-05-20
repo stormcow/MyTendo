@@ -3,17 +3,19 @@ name = "backend"
 version = "0.1.0"
 description = ""
 readme = "README.md"
+authors = ["stormcrow <monkiimode@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.10"
-mypy = "^1.5.1"
-fastapi = "^0.103.1"
-uvicorn = "^0.23.2"
-pydantic = "^2.4.2"
-httpio = "^0.3.0"
-sqlalchemy = "^2.0.21"
-ruff = "^0.1.2"
-httpx = "^0.25.0"
+python = "^3.12"
+mypy = "^1"
+fastapi = "^0"
+uvicorn = "^0"
+pydantic = "^2"
+httpio = "^0"
+sqlalchemy = "^2"
+ruff = "^0"
+httpx = "^0"
+bs4 = "^0.0.2"
 
 
 [build-system]
@@ -74,7 +76,7 @@ extend-select = [
    "TID",
    "YTT"
 ]
-extend-ignore = ["E203", "E501", "S101"]
+extend-ignore = ["E203", "E501", "S101","S501","TID252","T201"]
 fixable = ["ALL"]
 fix = true
 show-fixes = true

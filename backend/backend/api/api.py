@@ -2,7 +2,7 @@ from typing import Any
 
 from fastapi import APIRouter, status
 
-from ..service import handleWiki
+from ..service import handle_wiki
 
 router = APIRouter(prefix="/api", tags=["api"])
 
@@ -15,7 +15,7 @@ async def get_test() -> dict[str, str | int]:
 @router.get(path="/games", tags=["games"])
 async def get_games() -> dict[str, Any]:
     try:
-        games = await handleWiki.get_all_games()
+        games = await handle_wiki.get_all_games()
         return {
             "message": "Okay",
             "games": games,

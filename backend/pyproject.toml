@@ -76,7 +76,7 @@ extend-select = [
    "TID",
    "YTT"
 ]
-extend-ignore = ["E203", "E501", "S101","S501","TID252","T201"]
+extend-ignore = ["E203", "E501", "S101","S501","TID252","T201","B008"]
 fixable = ["ALL"]
 fix = true
 show-fixes = true

@@ -4,6 +4,8 @@ from typing import Any
 import httpx
 from bs4 import BeautifulSoup, Tag
 
+from backend.schemas.game import GameSchemaTransit
+
 URL = "https://en.wikipedia.org/w/api.php"
 PARAMS = {
     "cmdir": "desc",
@@ -23,7 +25,7 @@ def get_image(soup: Tag) -> dict[str, Any]:
     if isinstance(s, Tag):
         return {"image": s["src"]}
     else:
-        return {"image": False}
+        return {"image": None}
 
 
 def parse_game_info(game: httpx.Response) -> dict[str, Any]:
@@ -31,24 +33,22 @@ def parse_game_info(game: httpx.Response) -> dict[str, Any]:
         name="table", class_="infobox"
     )
     if not soup:
-        return {"infobox": False, "image": False}
+        return {"image": None}
     else:
-        img = get_image(soup) if isinstance(soup, Tag) else {"image": False}
-        img.update({"infobox": True})
+        img = get_image(soup) if isinstance(soup, Tag) else {"image": None}
         return img
 
 
-async def fetch_game_details(game: dict[str, str]) -> dict[str, Any]:
+async def fetch_game_details(game: dict[str, Any]) -> GameSchemaTransit:
     response = await client.get(
         url=f"https://en.wikipedia.org/w/index.php?curid={game['pageid']}"
     )
-    game["response"] = str(response.status_code)
     extra_info = parse_game_info(response)
     game.update(extra_info)
-    return game
+    return GameSchemaTransit(title=game["title"], image=game["image"])
 
 
-async def get_all_games() -> list[dict[str, str]]:
+async def get_all_games() -> list[GameSchemaTransit]:
     response = await client.get(url=URL, params=PARAMS)
     data = response.json()
     games: list[dict[str, str]] = []
@@ -56,9 +56,7 @@ async def get_all_games() -> list[dict[str, str]]:
         games.append(cm)
 
     tasks = [fetch_game_details(game) for game in games]
-    await asyncio.gather(*tasks)
-    tasks = []
-    return games
+    return await asyncio.gather(*tasks)
 
 
 async def main() -> None:

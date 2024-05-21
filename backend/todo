@@ -1,0 +1,4 @@
+save games to db #done
+add endpoint for returning games #done
+add endpoint for updating game(s)
+add error handling

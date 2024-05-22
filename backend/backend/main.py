@@ -1,13 +1,19 @@
+from contextlib import asynccontextmanager
+from typing import Any, AsyncGenerator
+
 from fastapi import FastAPI
 
-from .api import api
+from .api import api, middleware
 from .database.database import init_db
 
-app = FastAPI(debug=True)
+
+@asynccontextmanager
+async def lifespan(app: FastAPI) -> AsyncGenerator[Any, Any]:
+    init_db()
+    yield
+
+
+app = FastAPI(debug=True, lifespan=lifespan)
 
 app.include_router(api.router)
-
-
-@app.on_event("startup")
-async def startup() -> None:
-    init_db()
+app.add_middleware(middleware.HandleInit)

@@ -16,6 +16,7 @@ PARAMS = {
     "cmsort": "timestamp",
     "cmlimit": "500",
 }
+QUESTION_MARK_IMAGE = "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Question_mark-pixels.jpg/640px-Question_mark-pixels.jpg"
 
 client = httpx.AsyncClient(timeout=30, verify=False)
 
@@ -25,7 +26,7 @@ def get_image(soup: Tag) -> dict[str, Any]:
     if isinstance(s, Tag):
         return {"image": s["src"]}
     else:
-        return {"image": None}
+        return {"image": QUESTION_MARK_IMAGE}
 
 
 def parse_game_info(game: httpx.Response) -> dict[str, Any]:
@@ -57,13 +58,3 @@ async def get_all_games() -> list[GameSchemaTransit]:
 
     tasks = [fetch_game_details(game) for game in games]
     return await asyncio.gather(*tasks)
-
-
-async def main() -> None:
-    games = await get_all_games()
-    for game in games:
-        print(game)
-
-
-if __name__ == "__main__":
-    asyncio.run(main())

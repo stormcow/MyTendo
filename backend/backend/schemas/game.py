@@ -12,5 +12,5 @@ class GameSchemaTransit(BaseModel):
     owned: bool = False
 
 
-class GameSchema(GameSchemaTransit, Base):
+class GameSchema(Base, GameSchemaTransit):
     pass

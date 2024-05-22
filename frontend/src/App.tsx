@@ -24,6 +24,7 @@ function App() {
                 src={game?.image}
                 className='logo card'
                 onClick={()=>console.log(game)}
+                alt={game.title}
               />
             );
           })

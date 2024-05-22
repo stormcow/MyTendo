@@ -34,9 +34,11 @@ def parse_game_info(game: httpx.Response) -> dict[str, Any]:
         name="table", class_="infobox"
     )
     if not soup:
-        return {"image": None}
+        return {"image": QUESTION_MARK_IMAGE}
     else:
-        img = get_image(soup) if isinstance(soup, Tag) else {"image": None}
+        img = (
+            get_image(soup) if isinstance(soup, Tag) else {"image": QUESTION_MARK_IMAGE}
+        )
         return img
 
 
